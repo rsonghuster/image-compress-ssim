@@ -1,14 +1,14 @@
-# image-compress 帮助文档
+# image-compress-ssim 帮助文档
 
 <p align="center" class="flex justify-center">
     <a href="https://www.serverless-devs.com" class="ml-1">
-    <img src="http://editor.devsapp.cn/icon?package=image-compress&type=packageType">
+    <img src="http://editor.devsapp.cn/icon?package=image-compress-ssim&type=packageType">
   </a>
-  <a href="http://www.devsapp.cn/details.html?name=image-compress" class="ml-1">
-    <img src="http://editor.devsapp.cn/icon?package=image-compress&type=packageVersion">
+  <a href="http://www.devsapp.cn/details.html?name=image-compress-ssim" class="ml-1">
+    <img src="http://editor.devsapp.cn/icon?package=image-compress-ssim&type=packageVersion">
   </a>
-  <a href="http://www.devsapp.cn/details.html?name=image-compress" class="ml-1">
-    <img src="http://editor.devsapp.cn/icon?package=image-compress&type=packageDownload">
+  <a href="http://www.devsapp.cn/details.html?name=image-compress-ssim" class="ml-1">
+    <img src="http://editor.devsapp.cn/icon?package=image-compress-ssim&type=packageDownload">
   </a>
 </p>
 
@@ -34,7 +34,7 @@
 
 # 代码 & 预览
 
-- [:smiley_cat: 源代码](https://github.com/rsonghuster/image-compress)
+- [:smiley_cat: 源代码](https://github.com/rsonghuster/image-compress-ssim)
 
         
 
@@ -46,15 +46,15 @@
 
 <appcenter>
 
-- :fire: 通过 [Serverless 应用中心](https://fcnext.console.aliyun.com/applications/create?template=image-compress) ，
-[![Deploy with Severless Devs](https://img.alicdn.com/imgextra/i1/O1CN01w5RFbX1v45s8TIXPz_!!6000000006118-55-tps-95-28.svg)](https://fcnext.console.aliyun.com/applications/create?template=image-compress)  该应用。 
+- :fire: 通过 [Serverless 应用中心](https://fcnext.console.aliyun.com/applications/create?template=image-compress-ssim) ，
+[![Deploy with Severless Devs](https://img.alicdn.com/imgextra/i1/O1CN01w5RFbX1v45s8TIXPz_!!6000000006118-55-tps-95-28.svg)](https://fcnext.console.aliyun.com/applications/create?template=image-compress-ssim)  该应用。 
 
 </appcenter>
 
 - 通过 [Serverless Devs Cli](https://www.serverless-devs.com/serverless-devs/install) 进行部署：
     - [安装 Serverless Devs Cli 开发者工具](https://www.serverless-devs.com/serverless-devs/install) ，并进行[授权信息配置](https://www.serverless-devs.com/fc/config) ；
-    - 初始化项目：`s init image-compress -d image-compress`   
-    - 进入项目，并进行项目部署：`cd image-compress && s deploy -y`
+    - 初始化项目：`s init image-compress-ssim -d image-compress-ssim`   
+    - 进入项目，并进行项目部署：`cd image-compress-ssim && s deploy -y`
 
 </deploy>
 
@@ -74,7 +74,8 @@
   "region": "cn-hangzhou",
   "image": "src/a.png",
   "quality": 75,
-  "dst": "dest"
+  "dst": "dest",
+  "get_ssim": true
 }
 ```
 
@@ -85,6 +86,9 @@
 - image: 表示图片在 bucket 上的 objectkey
 - quality: 压缩质量 0-100, 默认值为 75
 - dst: 保存压缩后图片的目录
+- get_ssim: 可选，是否计算原图片和压缩后图片的 SSIM 值作为函数返回值
+  
+> SSIM 是一种全参考的图像质量评价指标，分别从亮度、对比度、结构三个方面度量图像相似性。SSIM取值范围[0, 1]，值越大，表示图像失真越小， 因为 SSIM 可以作为压缩后图像的指标。
 
 
 </appdetail>

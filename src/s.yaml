@@ -15,7 +15,7 @@
 #   有问题快来钉钉群问一下吧：33947367
 # ------------------------------------
 edition: 1.0.0
-name: image-compress
+name: image-compress-ssim
 # access 是当前应用所需要的密钥信息配置：
 # 密钥配置可以参考：https://www.serverless-devs.com/serverless-devs/command/config
 # 密钥使用顺序可以参考：https://www.serverless-devs.com/serverless-devs/tool#密钥使用顺序与规范
@@ -34,6 +34,9 @@ services:
     # 只对framework进行构建：s framework build
     # 如果不带有 framework ，而是直接执行 s build，工具则会对当前Yaml下，所有和 framework 平级的业务模块（如有其他平级的模块，例如下面注释的next-function），按照一定顺序进行 build 操作
     component: fc # 组件名称，Serverless Devs 工具本身类似于一种游戏机，不具备具体的业务能力，组件类似于游戏卡，用户通过向游戏机中插入不同的游戏卡实现不同的功能，即通过使用不同的组件实现不同的具体业务能力
+    actions:       
+      pre-deploy: 
+        - component: fc build --use-docker
     props: # 组件的属性值
       region: ${vars.region} # 关于变量的使用方法，可以参考：https://www.serverless-devs.com/serverless-devs/yaml#变量赋值
       service: ${vars.service}
@@ -43,5 +46,6 @@ services:
         codeUri: './code'
         runtime: python3.9
         handler: index.handler
-        timeout: 600
-        memorySize: 3072
+        timeout: 900
+        memorySize: 16384
+        instanceType: c1

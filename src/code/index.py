@@ -1,10 +1,11 @@
 # -*- coding: utf-8 -*-
-
 import oss2
 import json
 import os
 from wand.image import Image
 import subprocess
+from skimage import metrics
+import cv2
 
 
 def handler(event, context):
@@ -35,5 +36,21 @@ def handler(event, context):
     dst = evt['dst']
     bucket.put_object_from_file(os.path.join(dst, filename), new_image_path)
 
-    os.remove(image_path)
-    os.remove(new_image_path)
+    if evt.get("get_ssim"):
+        print("start compute SSIM ...")
+        try:
+            img1 = cv2.imread(image_path)
+            img2 = cv2.imread(new_image_path)
+            img1_gray = cv2.cvtColor(img1, cv2.COLOR_BGR2GRAY)
+            img2_gray = cv2.cvtColor(img2, cv2.COLOR_BGR2GRAY)
+
+            ssim = metrics.structural_similarity(img1_gray, img2_gray)
+        except Exception as e:
+            raise e
+        finally:
+            os.remove(image_path)
+            os.remove(new_image_path)
+
+        return ssim
+    else:
+        return -1
